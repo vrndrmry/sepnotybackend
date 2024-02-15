@@ -19,7 +19,6 @@ export const contactUsForm = async (req, res) => {
 
     if (req.files.length > 1) {
       return res.status(301).json({ msg: `You must upload only one file` });
-      contactDetails.uploadFile = req.files[0]?.path;
     } else {
       contactDetails.uploadFile = req.files[0]?.path;
       contactDetails

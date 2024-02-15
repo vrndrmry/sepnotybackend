@@ -16,10 +16,9 @@ var upload = multer({
     fileFilter:(req,file,callback)=>{
         const allowedTypes= ['application/pdf']
         if(allowedTypes.includes(file.mimetype)){
-            // console.log(file)
+
             callback(null,true);
         }else{
-            // console.log("Only pdf file supported")
             callback(new Error("Only pdf file supported"))
         }
     },
