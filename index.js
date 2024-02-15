@@ -5,10 +5,13 @@ import contactusRoute from './routes/contactUs.js'
 import bodyParser from 'body-parser'
 
 const app = express()
+// Load environment variables from .env file
+
 const PORTBACKEND = 3000
 
 dotenv.config()
 
+// MongoDB connection
 const connect = async()=>{
     try{
         await mongoose.connect(process.env.MONGO)
@@ -18,15 +21,15 @@ const connect = async()=>{
     }
 }
 
-
 // Middlewares
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
-// app.use('uploads',express.static('uploads'))
+app.use('/api/contact/uploads',express.static('uploads'))
 app.use('/api/contact',contactusRoute)
 
 
 
+// Listening to the post
 app.listen(process.env.PORT || PORTBACKEND,()=>{
     connect()
     console.log("Connected to backend port ")

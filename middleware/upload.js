@@ -7,20 +7,23 @@ var storage = multer.diskStorage({
     },
     filename: (req,file,cb)=>{
         let ext = path.extname(file.originalname)
-        cb(null, `${Date.now()}-${file.originalname.substr(0,file.originalname.indexOf('.'))}${ext}`)
+        cb(null, `${Date.now()}-${file.originalname.split(' ').join('')}`)
     }
 })
 
 var upload = multer({
     storage: storage,
     fileFilter:(req,file,callback)=>{
-        if(file.mimetype === 'application/pdf'){
+        const allowedTypes= ['application/pdf']
+        if(allowedTypes.includes(file.mimetype)){
+            // console.log(file)
             callback(null,true);
         }else{
-            console.log("Only pdf file supported")
-            callback(null,false)
+            // console.log("Only pdf file supported")
+            callback(new Error("Only pdf file supported"))
         }
-    }
+    },
+    limits: 1024*1024*30
 })
 
 export default upload

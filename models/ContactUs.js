@@ -29,11 +29,13 @@ const ContactUsSchema = new mongoose.Schema({
         properties:{
             contact:{
                 type:Boolean,
-                description:"I agree to have Sepnoty contact me via email, phone, messengers"
+                description:"I agree to have Sepnoty contact me via email, phone, messengers",
+                default:false
             },
             requestInfo:{
                 type:Boolean,
-                description:"I agree to have Sepnoty provide my request Information to Sepnoty affiliated development center"
+                description:"I agree to have Sepnoty provide my request Information to Sepnoty affiliated development center",
+                default:false
             }
         }
     },
