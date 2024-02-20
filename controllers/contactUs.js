@@ -18,7 +18,7 @@ export const contactUsForm = async (req, res) => {
     });
 
     if (req.files.length > 1) {
-      return res.status(301).json({ msg: `You must upload only one file` });
+      return res.status(415).json({ msg: `You must upload only one file` });
     } else {
       contactDetails.uploadFile = req.files[0]?.path;
       contactDetails
@@ -28,7 +28,7 @@ export const contactUsForm = async (req, res) => {
         })
         .catch((err) => {
           console.log(err);
-          res.status(500).json({ msg: "Server error please try again later" });
+          res.status(415).json({ msg: "Unsupported media file" });
         });
     }
   } catch (e) {
