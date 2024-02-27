@@ -1,7 +1,9 @@
 import express from 'express'
-import {createNewPost, getAllPost} from '../controllers/blog.js'
+import {createNewPost, deletePost, getAllPost} from '../controllers/blog.js'
+import blogUpload from '../middleware/blog.js'
 const router = express.Router()
 
 router.get('/post',getAllPost)
-router.post(`/:id/post`,createNewPost)
+router.post(`/:id/create`,blogUpload.single('image'),createNewPost)
+router.delete(`/:id/delete/:postid`,deletePost)
 export default router

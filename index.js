@@ -6,6 +6,7 @@ import proposalRoute from './routes/proposal.js'
 import loginForm from './routes/user.js'
 import bodyParser from 'body-parser'
 import post from './routes/blog.js'
+import cookieParser from 'cookie-parser'
 const app = express()
 // Load environment variables from .env file
 
@@ -27,7 +28,8 @@ const connect = async()=>{
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 
-app.use('/api/contact/uploads',express.static('uploads'))
+app.use('/api/contact/uploads/contactus',express.static('uploads'))
+app.use(cookieParser())
 app.use('/api/contact',contactusRoute)
 app.use('/api/proposal',proposalRoute)
 app.use('/api/login',loginForm)
