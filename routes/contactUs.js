@@ -8,6 +8,6 @@ const router = express.Router();
 // router.get("/", (req, res) => {
 //   res.send("Hello from routes");
 // });
-router.post("/contactus", upload.array(`uploadFile[]`),contactUsForm);
+router.post("/contactus", upload.single(`files`),contactUsForm);
 
 export default router;

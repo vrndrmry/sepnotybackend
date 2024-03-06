@@ -3,7 +3,12 @@ import postModel from "../models/Blog.js";
 import User from "../models/User.js";
 
 export const getAllPost = async (req, res) => {
-  res.json(await postModel.find().sort({ createdAt: -1 }));
+  try{
+    res.status(200).json(await postModel.find().sort({ createdAt: -1 }));
+  }catch(err){
+    res.status(500).json(err);
+  }
+  
 };
 
 // Creating a post
@@ -32,7 +37,7 @@ export const createNewPost = async (req, res) => {
             path: req.file?.path,
           },
         });
-        res.json(postDoc);
+        res.status(200).json(postDoc);
       });
     } else {
       res
@@ -40,7 +45,7 @@ export const createNewPost = async (req, res) => {
         .json({ message: "unauthorised access. Login to continue" });
     }
   } catch (err) {
-    res.status(401).json(err);
+    res.status(500).json(err);
   }
 };
 
@@ -57,9 +62,13 @@ export const deletePost = async (req, res) => {
       const postDoc = await postModel.deleteOne({ _id: postid, authorId: id });
 
       res.status(200).json({ message: "Post deleted" });
+    } else {
+      res
+        .status(401)
+        .json({ message: "unauthorised access. Login to continue" });
     }
   } catch (err) {
-    res.json(err);
+    res.status(500).json(err);
   }
 };
 
@@ -120,6 +129,6 @@ export const updatePost = async (req, res) => {
       });
     }
   } catch (err) {
-    res.json(err);
+    res.status(500).json(err);
   }
 };

@@ -10,14 +10,14 @@ export const adminLoginForm = async (req, res) => {
     }
     if (password.length < 8) {
       return res
-        .status(400)
+        .status(411)
         .json({ msg: "Password should minimum of 8 length" });
     }
 
     //check if user exists in the database
     const extractUser = await User.findOne({ username: username })
       if (extractUser) {
-        return res.status(400).json({ msg: "User already exists" });
+        return res.status(409).json({ msg: "User already exists" });
       }
     else{
         //create and save a new user

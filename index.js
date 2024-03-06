@@ -7,6 +7,7 @@ import loginForm from './routes/user.js'
 import bodyParser from 'body-parser'
 import post from './routes/blog.js'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 const app = express()
 // Load environment variables from .env file
 
@@ -27,7 +28,7 @@ const connect = async()=>{
 // Middlewares
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
-
+app.use(cors())
 app.use('/api/contact/uploads/contactus',express.static('uploads'))
 app.use(cookieParser())
 app.use('/api/contact',contactusRoute)
@@ -37,7 +38,7 @@ app.use('/api',post)
 
 
 // Listening to the post
-app.listen(process.env.PORT || PORTBACKEND,()=>{
+app.listen(process.env.PORT,()=>{
     connect()
-    console.log("Connected to backend port ")
+    console.log("Connected to backend port  ")
 })

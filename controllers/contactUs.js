@@ -3,7 +3,6 @@ import ContactUs from "../models/ContactUs.js";
 export const contactUsForm = async (req, res) => {
   const { username, email, companyName, phoneNumber, message, agreement } =
     req.body;
-
   try {
     if (!username || !email || !phoneNumber) {
       return res.status(400).json({ msg: "Please fill all fields" });
@@ -14,13 +13,11 @@ export const contactUsForm = async (req, res) => {
       companyName: companyName,
       phoneNumber: phoneNumber,
       message: message,
-      agreement: agreement,
+      agreement: JSON.parse(agreement),
     });
 
-    if (req.files.length > 1) {
-      return res.status(415).json({ msg: `You must upload only one file` });
-    } else {
-      contactDetails.uploadFile = req.files[0]?.path;
+
+      contactDetails.uploadFile = req.file?.path;
       contactDetails
         .save()
         .then(() => {
@@ -30,8 +27,9 @@ export const contactUsForm = async (req, res) => {
           console.log(err);
           res.status(415).json({ msg: "Unsupported media file" });
         });
-    }
-  } catch (e) {
-    res.status(400).send("an error occured");
+
+  } catch (err) {
+    console.log(err)
+    res.status(400).send(e);
   }
 };
