@@ -1,3 +1,4 @@
+import { awsFunction } from "../middleware/aws.js";
 import ContactUs from "../models/ContactUs.js";
 
 export const contactUsForm = async (req, res) => {
@@ -16,20 +17,19 @@ export const contactUsForm = async (req, res) => {
       agreement: JSON.parse(agreement),
     });
 
-
-      contactDetails.uploadFile = req.file?.path;
-      contactDetails
-        .save()
-        .then(() => {
-          res.status(201).json({ body: req.body, file: req.file });
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(415).json({ msg: "Unsupported media file" });
-        });
-
+    contactDetails.uploadFile = req.file?.path;
+    contactDetails
+      .save()
+      .then(() => {
+        res.status(201).json({ body: req.body, file: req.file });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(415).json({ msg: "Unsupported media file" });
+      });
+    await awsFunction();
   } catch (err) {
-    console.log(err)
-    res.status(400).send(e);
+    console.log(err);
+    res.status(400).send(err);
   }
 };

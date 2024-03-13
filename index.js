@@ -40,5 +40,5 @@ app.use('/api',post)
 // Listening to the post
 app.listen(process.env.PORT,()=>{
     connect()
-    console.log("Connected to backend port  ")
+    console.log("Connected to backend port ")
 })

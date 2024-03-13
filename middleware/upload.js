@@ -1,6 +1,7 @@
 import path from 'path'
 import multer from 'multer'
 
+
 var storage = multer.diskStorage({
     destination:(req,file,cb)=>{
         cb(null, 'uploads/contactus/')
@@ -24,5 +25,6 @@ var upload = multer({
     },
     limits: 1024*1024*30
 })
+
 
 export default upload
