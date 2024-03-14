@@ -28,7 +28,7 @@ const connect = async()=>{
 // Middlewares
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
-app.use(cors())
+app.use(cors({origin:"*"}))
 app.use('/api/contact/uploads/contactus',express.static('uploads'))
 app.use(cookieParser())
 app.use('/api/contact',contactusRoute)
