@@ -12,7 +12,6 @@ const s3 = new AWS.S3({
 export const uploadFileToS3 = (filePath) => {
   return new Promise((resolve, reject) => {
     // const fileName = filePath.file.filename; // Get the file name from the file path
-    console.log(filePath);
     fs.readFile(filePath, (err, data) => {
       if (err) {
         return reject(err);
@@ -58,12 +57,7 @@ export const awsFunction = () =>
 
     // Upload each file in the folder to S3
     files.forEach((file) => {
-      // console.log(uploadFolder)
-      // console.log(file)
-      // console.log(path.join(uploadFolder,file))
       const filePath = path.join(uploadFolder, file);
-
-      console.log(filePath);
       uploadFileToS3(filePath)
         .then((url) => {
           console.log(`File ${file} uploaded successfully. URL:`, url);

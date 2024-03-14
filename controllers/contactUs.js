@@ -24,12 +24,14 @@ export const contactUsForm = async (req, res) => {
         res.status(201).json({ body: req.body, file: req.file });
       })
       .catch((err) => {
-        console.log(err);
         res.status(415).json({ msg: "Unsupported media file" });
       });
-    await awsFunction();
+    try {
+      awsFunction();
+    } catch (err) {
+      console.log(err);
+    }
   } catch (err) {
-    console.log(err);
     res.status(400).send(err);
   }
 };
