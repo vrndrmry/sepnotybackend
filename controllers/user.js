@@ -37,7 +37,6 @@ export const adminLoginForm = async (req, res) => {
 
 export const userLoginForm = async (req, res) => {
   const { username, password } = req.body;
-
   try {
     if (!username) {
       return res.status(400).json({ message: "Enter Username" });
