@@ -40,7 +40,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({ origin: "*"}));
+app.use(cors({ origin: "https://shivdas.live" }));
 app.use('/api/contact/uploads/contactus',express.static('uploads'))
 app.use(cookieParser())
 app.use('/api/contact',contactusRoute)
