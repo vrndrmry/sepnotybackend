@@ -39,7 +39,8 @@ app.use((req, res, next) => {
   // res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 });
-app.use(cors({ origin: "*", credentials: true }));
+
+app.use(cors({ origin: "*"}));
 app.use('/api/contact/uploads/contactus',express.static('uploads'))
 app.use(cookieParser())
 app.use('/api/contact',contactusRoute)
