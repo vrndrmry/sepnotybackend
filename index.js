@@ -1,33 +1,41 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import mongoose from 'mongoose'
-import contactusRoute from './routes/contactUs.js'
-import proposalRoute from './routes/proposal.js'
-import loginForm from './routes/user.js'
-import bodyParser from 'body-parser'
-import post from './routes/blog.js'
-import cookieParser from 'cookie-parser'
-import cors from 'cors'
-const app = express()
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import contactusRoute from "./routes/contactUs.js";
+import loginForm from "./routes/user.js";
+import bodyParser from "body-parser";
+import post from "./routes/blog.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import websiteProposalRoute from './routes/proposal/websiteProposalRoute.js'
+import softwareProposalRoute from './routes/proposal/softwareProposalRoute.js'
+import applicationProposalRoute from './routes/proposal/applicationProposalRoute.js'
+
+const app = express();
 // Load environment variables from .env file
 
-const PORTBACKEND = 3000
+const PORTBACKEND = 8801; //Alternative for port
 
-dotenv.config()
+dotenv.config();
 
 // MongoDB connection
-const connect = async()=>{
-    try{
-        await mongoose.connect(process.env.MONGO)
-        console.log("Connected to mongoDB")
-    }catch(err){
-        throw new Error(err)
-    }
-}
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO);
+    console.log("Connected to mongoDB");
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json())
+
+app.use(express.json());
+app.use(cors());
+// app.use(cookieParser());
+app.use(cors({ origin: "*" }));
+
 app.use((req, res, next) => {
   // Allow requests from any origin
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -40,17 +48,16 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({ origin: "https://shivdas.live" }));
-app.use('/api/contact/uploads/contactus',express.static('uploads'))
-app.use(cookieParser())
-app.use('/api/contact',contactusRoute)
-app.use('/api/proposal',proposalRoute)
-app.use('/api/login',loginForm)
-app.use('/api',post)
+app.use("/api/contact/uploads/contactus", express.static("uploads"));
 
-
+app.use("/api/contact", contactusRoute);
+app.use("/api/login", loginForm);
+app.use("/api", post);
+app.use("/api/proposal/website",websiteProposalRoute)
+app.use("/api/proposal/software",softwareProposalRoute)
+app.use('/api/proposal/application',applicationProposalRoute)
 // Listening to the post
-app.listen(process.env.PORT,()=>{
-    connect()
-    console.log("Connected to backend port ")
-})
+app.listen(process.env.PORT || PORTBACKEND, () => {
+  connect();
+  console.log("Connected to backend port ");
+});

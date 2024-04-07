@@ -1,17 +1,16 @@
 import mongoose from "mongoose";
-var { Schema } = mongoose;
 
-const BlogSchema = new mongoose.Schema(
+var {Schema} = mongoose
+
+const ArticleScehma = new mongoose.Schema(
   {
-    typeOfPost: {
-      type: String,
-      required: true,
-    },
+    authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    author: { type: mongoose.Schema.Types.String, ref: "User" },
     title: {
       type: String,
       required: true,
     },
-    summary: {
+    description: {
       type: String,
       required: true,
     },
@@ -26,12 +25,10 @@ const BlogSchema = new mongoose.Schema(
       contentType: String,
       path: String,
     },
-    authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    author: { type: mongoose.Schema.Types.String, ref: "User" },
   },
   { timestamps: true }
 );
 
-const postModel = new mongoose.model("PostModel", BlogSchema);
+const articleModel = new mongoose.model("ArticleModel", ArticleScehma);
 
-export default postModel;
+export default articleModel
