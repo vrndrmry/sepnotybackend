@@ -45,7 +45,7 @@ app.use((req, res, next) => {
   // Allow certain headers
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   // Allow credentials (if required)
-  // res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 });
 
