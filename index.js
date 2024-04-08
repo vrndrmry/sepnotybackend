@@ -1,4 +1,5 @@
 import express from "express";
+import fs from 'fs'
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import contactusRoute from "./routes/contactUs.js";
@@ -48,6 +49,16 @@ app.use((req, res, next) => {
   next();
 });
 
+// HTTPS Options
+const httpsOptions = {
+    key: fs.readFileSync('/etc/letsencrypt/live/back.shivdas.live/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/back.shivdas.live/fullchain.pem')
+};
+
+// Create HTTPS Server
+const server = https.createServer(httpsOptions, app);
+
+
 app.use("/api/contact/uploads/contactus", express.static("uploads"));
 
 app.use("/api/contact", contactusRoute);
@@ -56,6 +67,8 @@ app.use("/api", post);
 app.use("/api/proposal/website",websiteProposalRoute)
 app.use("/api/proposal/software",softwareProposalRoute)
 app.use('/api/proposal/application',applicationProposalRoute)
+
+
 // Listening to the post
 app.listen(process.env.PORT || PORTBACKEND, () => {
   connect();
