@@ -4,7 +4,7 @@ export const softwareProposalController = async (req, res) => {
   const {
     typeofDevelopment,
     typeOfSoftware,
-    tools,
+    numberofTools,
     industryType,
     services,
     otherServiceDetails,
@@ -16,15 +16,20 @@ export const softwareProposalController = async (req, res) => {
     paymentSystem,
     visitors,
     complianceRequirements,
-    externalIntegration,
     details,
     websiteLink,
     username,
     companyName,
     email,
     phoneNumber,
+    integrationDetails,
     wayOfCommunication,
+    indstryotherDetails,
     agreement,
+    otherCompliance,
+    otherFeatureDetails,
+    otherMediaDetails,
+    otherSoftwareDetails,
   } = req.body;
 
   try {
@@ -41,7 +46,7 @@ export const softwareProposalController = async (req, res) => {
     let softwareProposalDetails = await new softwareProposalModel({
       typeofDevelopment,
       typeOfSoftware,
-      numberofTools: tools ? tools : null,
+      numberofTools,
       industryType,
       services,
       otherServiceDetails,
@@ -53,7 +58,6 @@ export const softwareProposalController = async (req, res) => {
       paymentSystem,
       visitors,
       complianceRequirements,
-      externalIntegration,
       details,
       websiteLink,
       username,
@@ -61,14 +65,21 @@ export const softwareProposalController = async (req, res) => {
       email,
       phoneNumber,
       wayOfCommunication,
+      industryotherDetails: indstryotherDetails,
+      integrationDetails,
+      otherCompliance,
       agreement,
+      otherFeatureDetails,
+      otherMediaDetails,
+      otherSoftwareDetails,
     });
 
-    softwareProposalDetails.save().then(
-        res.status(200).json({message:"Details have been shared "})
-    ).catch(err=>{
-        throw new Error(err)
-    })
+    await softwareProposalDetails
+      .save()
+      .then(res.status(200).json({ message: "Details have been shared " }))
+      .catch((err) => {
+        throw new Error(err);
+      });
   } catch (err) {
     console.log("Error in Software Proposal Submission: ", err);
     res.status(500).json({

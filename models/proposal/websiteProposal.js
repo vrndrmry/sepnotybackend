@@ -29,6 +29,11 @@ const websitePropsalSchema = new mongoose.Schema(
       description: "It will contain an array of industry types",
       default: [],
     },
+    indstryotherDetails: {
+      type: String,
+      description: "Other industry type  details",
+      default: "",
+    },
     services: {
       type: String,
       required: true,
@@ -76,6 +81,21 @@ const websitePropsalSchema = new mongoose.Schema(
       description: "Status of payment",
       default: false,
     },
+    otherFeatureDetails: {
+      type: String,
+      description: "other feature details",
+      default: "",
+    },
+    otherMediaDetails: {
+      type: String,
+      description: "Other media details",
+      default: "",
+    },
+    otherTypeOfWebsite: {
+      type: String,
+      description: "Other type of website",
+      default: "",
+    },
     visitors: {
       type: String,
       required: true,
@@ -92,12 +112,6 @@ const websitePropsalSchema = new mongoose.Schema(
       type: String,
       description: "Other compliance details",
       default: "",
-    },
-    externalIntegration: {
-      type: String,
-      required: true,
-      description: "Status of external Integration",
-      default: "no",
     },
     integrationDetails: {
       type: String,
@@ -143,6 +157,7 @@ const websitePropsalSchema = new mongoose.Schema(
       description: "Preferred way of communication",
       default: "",
     },
+
     agreement: {
       type: Object,
       description: "Contains terms and conditions while submitting the request",

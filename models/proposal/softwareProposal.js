@@ -10,6 +10,18 @@ const softwarePropsalSchema = new mongoose.Schema(
         "It will contain the type of the proposal that the user wants preferrably software for this model",
       default: "",
     },
+    industryotherDetails: {
+      type: String,
+      description:
+        "This field is used to provide any additional details related to industry or other fields",
+      default: "",
+    },
+
+    integrationDetails: {
+      type: String,
+      description: "This field is used store inetgration details",
+      default: "",
+    },
     typeOfSoftware: {
       type: [String],
       required: true,
@@ -35,15 +47,37 @@ const softwarePropsalSchema = new mongoose.Schema(
       description: "Type of services that the user need",
       default: "",
     },
-    otherServiceDetails:{
-      type:String,
-      description: 'Other details about service',
-      default:""
+    otherServiceDetails: {
+      type: String,
+      description: "Other details about service",
+      default: "",
     },
     UIDesignMockups: {
       type: String,
       required: true,
       description: "Store Design Mockups information",
+      default: "",
+    },
+    otherCompliance: {
+      type: String,
+      description: "Any other compliances",
+      default: "",
+    },
+    otherFeatureDetails: {
+      type: String,
+      description: "Other feature details",
+      default: "",
+    },
+    otherMediaDetails: {
+      type: String,
+      description:
+        "Other media files related to project like sketch file or any other design tools files.",
+      default: "",
+    },
+    otherSoftwareDetails: {
+      type: String,
+      description:
+        "If there is any third party software/tools used in this project then mention it here.",
       default: "",
     },
     chosenCMS: {
@@ -52,10 +86,10 @@ const softwarePropsalSchema = new mongoose.Schema(
       description: "CMS status",
       default: "",
     },
-    cmsDetails:{
-      type:String,
-      description:'More CMS Details',
-      default:""
+    cmsDetails: {
+      type: String,
+      description: "More CMS Details",
+      default: "",
     },
     appFeatures: {
       type: [String],
@@ -86,12 +120,6 @@ const softwarePropsalSchema = new mongoose.Schema(
       required: true,
       description: "List of compliance requirements",
       default: [],
-    },
-    externalIntegration: {
-      type: String,
-      required: true,
-      description: "Status of external Integration",
-      default: "no",
     },
     details: {
       type: String,
@@ -161,4 +189,3 @@ const softwareProposalModel = new mongoose.model(
 );
 
 export default softwareProposalModel;
-

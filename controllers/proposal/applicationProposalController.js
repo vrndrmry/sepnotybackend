@@ -7,8 +7,9 @@ export const applicationProposalController = async (req,res) =>{
       typeOfWebsite,
       numberOfPages,
       industryType,
+      indstryotherDetails,
       services,
-      webisiteLink,
+      websiteLink,
       otherServiceDetails,
       UIDesignMockups,
       chosenCMS,
@@ -28,11 +29,14 @@ export const applicationProposalController = async (req,res) =>{
       phoneNumber,
       wayOfCommunication,
       agreement,
+      otherFeatureDetails,
+      otherMediaDetails,
+      otherTypeOfWebsite,
     } = req.body;
 
 
     try{
-        if (typeofDevelopment !== "application") {
+        if (typeofDevelopment !== "Application") {
           return res
             .status(501)
             .json({ message: "There is an error in website route." });
@@ -46,8 +50,9 @@ export const applicationProposalController = async (req,res) =>{
           typeOfWebsite,
           numberOfPages,
           industryType,
+          indstryotherDetails,
           services,
-          webisiteLink,
+          websiteLink,
           otherServiceDetails,
           UIDesignMockups,
           chosenCMS,
@@ -67,6 +72,9 @@ export const applicationProposalController = async (req,res) =>{
           phoneNumber,
           wayOfCommunication,
           agreement,
+          otherFeatureDetails,
+          otherMediaDetails,
+          otherTypeOfWebsite,
         });
 
         webisteProposalDetails.save().then(() => {

@@ -6,8 +6,10 @@ export const websiteProposalController = async (req,res)=>{
       typeOfWebsite,
       numberOfPages,
       industryType,
+      indstryotherDetails,
+      otherFeatureDetails,
       services,
-      webisiteLink,
+      websiteLink,
       otherServiceDetails,
       UIDesignMockups,
       chosenCMS,
@@ -27,6 +29,8 @@ export const websiteProposalController = async (req,res)=>{
       phoneNumber,
       wayOfCommunication,
       agreement,
+      otherMediaDetails,
+      otherTypeOfWebsite,
     } = req.body;
 
 
@@ -45,8 +49,9 @@ export const websiteProposalController = async (req,res)=>{
           typeOfWebsite,
           numberOfPages,
           industryType,
+          indstryotherDetails,
           services,
-          webisiteLink,
+          websiteLink,
           otherServiceDetails,
           UIDesignMockups,
           chosenCMS,
@@ -66,6 +71,9 @@ export const websiteProposalController = async (req,res)=>{
           phoneNumber,
           wayOfCommunication,
           agreement,
+          otherFeatureDetails,
+          otherMediaDetails,
+          otherTypeOfWebsite,
         });
 
         webisteProposalDetails.save().then(() => {
