@@ -3,10 +3,10 @@ import fs from "fs";
 import path from "path";
 
 // Configure AWS with your accessKeyId and secretAccessKey
-const s3 = new AWS.S3({
-  accessKeyId: "accessKEy",
-  secretAccessKey: "SecretKey",
-});
+// const s3 = new AWS.S3({
+//   accessKeyId: "accessKEy",
+//   secretAccessKey: "SecretKey",
+// });
 
 // Function to upload a file from "uploads" folder to AWS S3 bucket
 export const uploadFileToS3 = (filePath) => {

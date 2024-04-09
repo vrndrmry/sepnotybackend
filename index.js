@@ -15,9 +15,6 @@ import applicationProposalRoute from './routes/proposal/applicationProposalRoute
 
 const app = express();
 // Load environment variables from .env file
-
-const PORTBACKEND = 8801; //Alternative for port
-
 dotenv.config();
 
 // Middleware related to SSL certificate handling
@@ -64,7 +61,7 @@ app.use("/api", post);
 
 
 // Listening to the port
-app.listen(process.env.PORT || PORTBACKEND, () => {
+app.listen(process.env.PORT, () => {
   connect();
   console.log("Connected to backend port");
 });
