@@ -61,7 +61,7 @@ app.use("/api", post);
 
 
 // Listening to the port
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   connect();
   console.log("Connected to backend port");
 });
