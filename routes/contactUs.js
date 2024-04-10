@@ -1,7 +1,7 @@
 import express from "express";
 import { contactUsForm } from "../controllers/contactUs.js";
 import upload from "../middleware/upload.js";
-import { awsFunction, uploadFileToS3 } from "../middleware/aws.js";
+// import { awsFunction, uploadFileToS3 } from "../middleware/aws.js";
 
 const router = express.Router();
 

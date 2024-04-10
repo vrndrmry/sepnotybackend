@@ -12,6 +12,7 @@ import cors from "cors";
 import websiteProposalRoute from './routes/proposal/websiteProposalRoute.js';
 import softwareProposalRoute from './routes/proposal/softwareProposalRoute.js';
 import applicationProposalRoute from './routes/proposal/applicationProposalRoute.js';
+import candidateResumeRoute from './routes/candidateResume.js';
 
 const app = express();
 // Load environment variables from .env file
@@ -43,8 +44,8 @@ const connect = async () => {
 
 // HTTPS Options
 const httpsOptions = {
-    key: fs.readFileSync('/etc/letsencrypt/live/back.shivdas.live/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/back.shivdas.live/fullchain.pem')
+    // key: fs.readFileSync('/etc/letsencrypt/live/back.shivdas.live/privkey.pem'),
+    // cert: fs.readFileSync('/etc/letsencrypt/live/back.shivdas.live/fullchain.pem')
 };
 
 // Create HTTPS Server
@@ -52,13 +53,22 @@ const server = https.createServer(httpsOptions, app);
 
 
 app.use("/api/contact/uploads/contactus", express.static("uploads"));
+app.use("/api/candidate/uploads/candidateResume", express.static("uploads"));
+
 app.use("/api/contact", contactusRoute);
 app.use("/api/proposal/website", websiteProposalRoute);
 app.use("/api/proposal/software", softwareProposalRoute);
 app.use('/api/proposal/application', applicationProposalRoute);
+app.use('/api/candidate',candidateResumeRoute)
 app.use("/api/login", loginForm);
 app.use("/api", post);
 
+
+// Listening to the port while testing on localhost
+// app.listen(process.env.PORT, () => {
+//   connect();
+//   console.log("Connected to backend port");
+// });
 
 // Listening to the port
 server.listen(process.env.PORT, () => {
